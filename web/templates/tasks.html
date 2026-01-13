@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: #1c1c1c;
+            border-bottom: 2px solid #444;
+        }
+
+        header .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        header .navbar-nav .nav-link {
+            color: #bbb;
+        }
+
+        header .navbar-nav .nav-link:hover {
+            color: #f39c12;
+        }
+
+        table {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        table th, table td {
+            color: #ddd;
+        }
+
+        table th {
+            background-color: #333;
+        }
+
+        table td {
+            background-color: #262626;
+        }
+
+        table tr:nth-child(even) td {
+            background-color: #333;
+        }
+        .btn-custom {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+        .btn-custom:hover {
+            background-color: #e67e22;
+            color: #fff;
+        }
+        @media (max-width: 767px) {
+            table th, table td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Client-server Golang Project (Tasks)</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Main Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tasks">Tasks Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create_task">Create Task Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="mt-5">Список задач</h2>
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">TaskId</th>
+                    <th scope="col">TaskAgent</th>
+                    <th scope="col">TaskCreationTime</th>
+                    <th scope="col">TaskText</th>
+                    <th scope="col">TaskResult</th>
+                    <th scope="col">TaskResultTime</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <td>{{.TaskId}}</td>
+                    <td>{{.TaskAgent}}</td>
+                    <td>{{.TaskCreationTime}}</td>
+                    <td>{{.TaskText}}</td>
+                    <td>{{.TaskResult}}</td>
+                    <td>{{.TaskResultTime}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
