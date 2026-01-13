@@ -89,21 +89,21 @@
     </header>
 
     <div class="container">
-        <h2 class="mt-5">Список агентов</h2>
+        <h2 class="mt-5">Список компьютеров</h2>
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>
-                    <th scope="col">AgentID</th>
-                    <th scope="col">AgentName</th>
-                    <th scope="col">AgentLastTimeMessage</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">LastTimeMessage</th>
                 </tr>
             </thead>
             <tbody>
                 {{ range . }}
                     <tr></tr>
-                        <td>{{.AgentId}}</td>
-                        <td>{{.AgentName}}</td>
-                        <td>{{.AgentLastTimeMessage}}</td>
+                        <td>{{.CompId}}</td>
+                        <td>{{.CompName}}</td>
+                        <td>{{.CompLastTimeMessage}}</td>
                     </tr>
                 {{ end }} 
             </tbody>
