@@ -1,6 +1,7 @@
 package main
 
 import (
+	"BigProject/internal/handlers"
 	"log"
 	"net/http"
 )
@@ -8,9 +9,9 @@ import (
 func main() {
 	m := http.NewServeMux()
 
-	m.HandleFunc("/", IndexHandler)
-	m.HandleFunc("/tasks", TasksHandler)
-	m.HandleFunc("/create_task", CreateTaskhandler)
+	m.HandleFunc("/", handlers.IndexHandler)
+	m.HandleFunc("/tasks", handlers.TasksHandler)
+	m.HandleFunc("/create_task", handlers.CreateTaskhandler)
 	log.Println("Server started...")
 	http.ListenAndServe(":8080", m)
 
