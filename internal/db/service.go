@@ -8,6 +8,7 @@ import (
 )
 
 func SelectAllComps() []models.Comp {
+
 	db := DbConnect()
 	defer db.Close()
 	rows, err := db.Query(`SELECT * FROM comps`)
@@ -30,6 +31,7 @@ func SelectAllComps() []models.Comp {
 }
 
 func SelectAllTasks() []models.Task {
+
 	db := DbConnect()
 	defer db.Close()
 	rows, err := db.Query(`SELECT * FROM tasks`)

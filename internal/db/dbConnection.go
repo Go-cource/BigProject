@@ -8,7 +8,7 @@ import (
 )
 
 func DbConnect() *sql.DB {
-	db, err := sql.Open("sqlite", ".../clients.db")
+	db, err := sql.Open("sqlite", "./clients.db")
 	if err != nil {
 		log.Fatalf("Couldn't connect to db: %v\n", err)
 	}

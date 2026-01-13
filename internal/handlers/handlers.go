@@ -12,7 +12,7 @@ import (
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		comps := db.SelectAllComps()
-		tmpl, _ := template.ParseFiles("../web/templates/index.html")
+		tmpl, _ := template.ParseFiles("./web/templates/index.html")
 		tmpl.Execute(w, comps)
 	}
 }
@@ -20,7 +20,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 func TasksHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		tasks := db.SelectAllTasks()
-		tmpl, _ := template.ParseFiles("../web/templates/tasks.html")
+		tmpl, _ := template.ParseFiles("./web/templates/tasks.html")
 		tmpl.Execute(w, tasks)
 	}
 }
@@ -28,7 +28,7 @@ func TasksHandler(w http.ResponseWriter, r *http.Request) {
 func CreateTaskhandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		comps := db.SelectAllComps()
-		tmpl, _ := template.ParseFiles("../web/templates/createTask.html")
+		tmpl, _ := template.ParseFiles("./web/templates/createTask.html")
 		tmpl.Execute(w, comps)
 	}
 	if r.Method == http.MethodPost {
