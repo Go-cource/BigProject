@@ -24,6 +24,22 @@ func TasksHandler(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("./web/templates/tasks.html")
 		tmpl.Execute(w, tasks)
 	}
+	if r.Method == http.MethodPost {
+		var newCompTaskResult models.CompTaskResult
+		err := json.NewDecoder(r.Body).Decode(&newCompTaskResult)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(err.Error()))
+			return
+		}
+		err = db.UpdateCompTask(newCompTaskResult)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(err.Error()))
+			return
+		}
+		w.Write([]byte(`{"status": "ok"}`))
+	}
 }
 
 func CreateTaskhandler(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +66,7 @@ func AskTasksHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		name := r.URL.Query().Get("name")
 		allTasks := db.SelectAllTasks()
-		
+
 		var nameCompTasks = make([]models.Task, 0, 1)
 
 		for _, v := range allTasks {

@@ -15,3 +15,7 @@ type Task struct {
 	TaskResultTime   string
 }
 
+type CompTaskResult struct {
+	TaskId     int
+	TaskResult string
+}

@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 )
 
 func SelectAllComps() []models.Comp {
@@ -76,6 +77,25 @@ func InsertNewTask(newTask models.Task) error {
 	if err != nil {
 		fmt.Println(err)
 		return err
+	}
+	return nil
+}
+
+func UpdateCompTask(updateTask models.CompTaskResult) error {
+	db := DbConnect()
+	defer db.Close()
+	res, err := db.Exec(`UPDATE tasks SET tasks_result=?, tasks_result_time=? WHERE tasks_id = ?`, updateTask.TaskResult, time.Now().Format("2006/01/02 15:04:05"), updateTask.TaskId)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	count, err := res.RowsAffected()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	if count == 0 {
+		return fmt.Errorf("Zero rows affected")
 	}
 	return nil
 }
