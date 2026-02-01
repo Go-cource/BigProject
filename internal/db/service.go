@@ -68,3 +68,14 @@ func SelectAllTasks() []models.Task {
 	return Tasks
 
 }
+
+func InsertNewTask(newTask models.Task) error {
+	db := DbConnect()
+	defer db.Close()
+	_, err := db.Exec(`INSERT INTO tasks (tasks_comp, tasks_creation_time, tasks_text) VALUES (?, ?, ?)`, newTask.TaskComp, newTask.TaskCreationTime, newTask.TaskText)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	return nil
+}

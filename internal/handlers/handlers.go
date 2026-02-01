@@ -3,7 +3,6 @@ package handlers
 import (
 	"BigProject/internal/db"
 	"BigProject/internal/models"
-	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -36,6 +35,11 @@ func CreateTaskhandler(w http.ResponseWriter, r *http.Request) {
 		NewTask.TaskComp = r.FormValue("CompName")
 		NewTask.TaskText = r.FormValue("TaskText")
 		NewTask.TaskCreationTime = time.Now().Format("2006/01/02 15:04:05")
-		fmt.Printf("New Task: \n %+v", NewTask)
+		err := db.InsertNewTask(NewTask)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(err.Error()))
+		}
+		http.Redirect(w, r, "/tasks", http.StatusFound)
 	}
 }
