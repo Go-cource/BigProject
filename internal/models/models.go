@@ -14,3 +14,4 @@ type Task struct {
 	TaskResult       string
 	TaskResultTime   string
 }
+

@@ -3,6 +3,8 @@ package handlers
 import (
 	"BigProject/internal/db"
 	"BigProject/internal/models"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -41,5 +43,28 @@ func CreateTaskhandler(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte(err.Error()))
 		}
 		http.Redirect(w, r, "/tasks", http.StatusFound)
+	}
+}
+
+func AskTasksHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		name := r.URL.Query().Get("name")
+		allTasks := db.SelectAllTasks()
+		
+		var nameCompTasks = make([]models.Task, 0, 1)
+
+		for _, v := range allTasks {
+			if v.TaskComp == name {
+				nameCompTasks = append(nameCompTasks, v)
+			}
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		err := json.NewEncoder(w).Encode(nameCompTasks)
+		if err != nil {
+			fmt.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+		}
 	}
 }
